@@ -65,13 +65,13 @@ export function isValidStringCharacter(code: number): boolean {
 }
 
 export function isDelimiter(char: string): boolean {
-  return regexDelimiter.test(char) || (char && isQuote(char.charCodeAt(0)))
+  return Boolean(regexDelimiter.test(char) || (char && isQuote(char.charCodeAt(0)))).valueOf()
 }
 
 const regexDelimiter = /^[,:[\]{}()\n]$/
 
 export function isStartOfValue(char: string): boolean {
-  return regexStartOfValue.test(char) || (char && isQuote(char.charCodeAt(0)))
+  return Boolean(regexStartOfValue.test(char) || (char && isQuote(char.charCodeAt(0)))).valueOf()
 }
 
 // alpha, number, minus, or opening bracket or brace

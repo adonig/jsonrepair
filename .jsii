@@ -1,0 +1,125 @@
+{
+  "author": {
+    "name": "Jos de Jong",
+    "roles": [
+      "author"
+    ]
+  },
+  "bin": {
+    "jsonrepair": "./bin/cli.js"
+  },
+  "description": "Repair broken JSON documents",
+  "homepage": "https://github.com/josdejong/jsonrepair.git",
+  "jsiiVersion": "1.72.0 (build 4b8828b)",
+  "keywords": [
+    "simple",
+    "json",
+    "repair",
+    "fix",
+    "invalid"
+  ],
+  "license": "ISC",
+  "metadata": {
+    "jsii": {
+      "pacmak": {
+        "hasDefaultInterfaces": true
+      }
+    }
+  },
+  "name": "jsonrepair",
+  "readme": {
+    "markdown": "# jsonrepair\n\nRepair invalid JSON documents.\n\nTry it out in a minimal demo: https://josdejong.github.io/jsonrepair/\n\nUse it in a full-fledged application: https://jsoneditoronline.org\n\nRead the background article [\"How to fix JSON and validate it with ease\"](https://jsoneditoronline.org/indepth/parse/fix-json/)\n\nThe following issues can be fixed:\n\n- Add missing quotes around keys\n- Add missing escape characters\n- Add missing commas\n- Add missing closing brackets\n- Replace single quotes with double quotes\n- Replace special quote characters like `“...”`  with regular double quotes\n- Replace special white space characters with regular spaces\n- Replace Python constants `None`, `True`, and `False` with `null`, `true`, and `false`\n- Strip trailing commas\n- Strip comments like `/* ... */` and `// ...`\n- Strip JSONP notation like `callback({ ... })`\n- Strip escape characters from an escaped string like `{\\\"stringified\\\": \\\"content\\\"}`\n- Strip MongoDB data types like `NumberLong(2)` and `ISODate(\"2012-12-19T06:01:17.171Z\")`\n- Concatenate strings like `\"long text\" + \"more text on next line\"`\n- Turn newline delimited JSON into a valid JSON array, for example:\n    ```\n    { \"id\": 1, \"name\": \"John\" }\n    { \"id\": 2, \"name\": \"Sarah\" }\n    ```\n\n\n## Install\n\n```\n$ npm install jsonrepair\n```\n\nNote that in the `lib` folder, there are builds for ESM, UMD, and CommonJs.\n\n\n## Use\n\nUse with an ES modules import (recommended):\n\n```js\nimport { jsonrepair } from 'jsonrepair'\n\ntry {\n  // The following is invalid JSON: is consists of JSON contents copied from\n  // a JavaScript code base, where the keys are missing double quotes,\n  // and strings are using single quotes:\n  const json = \"{name: 'John'}\"\n\n  const repaired = jsonrepair(json)\n\n  console.log(repaired) // '{\"name\": \"John\"}'\n} catch (err) {\n  console.error(err)\n}\n```\n\nUse in CommonJS (not recommended):\n\n```js\nconst { jsonrepair } = require('jsonrepair')\nconst json = \"{name: 'John'}\"\nconsole.log(jsonrepair(json)) // '{\"name\": \"John\"}'\n```\n\nUse with UMD in the browser (not recommended):\n\n```html\n<script src=\"/node_modules/jsonrepair/lib/umd/jsonrepair.js\"></script>\n<script>\n  const { jsonrepair } = JSONRepair\n  const json = \"{name: 'John'}\"\n  console.log(jsonrepair(json)) // '{\"name\": \"John\"}'\n</script>\n```\n\n\n### API\n\n```ts\n// @throws JSONRepairError\njsonrepair(json: string) : string\n```\n\nThe function `jsonrepair` throws an exception `JSONRepairError` when an issue is encountered which could not be solved. When no error is thrown, the output will be valid JSON.\n\n\n### Command Line Interface (CLI)\n\nWhen `jsonrepair` is installed globally using npm, it can be used on the command line. To install `jsonrepair` globally:\n\n```bash\n$ npm install -g jsonrepair\n```\n\nUsage:\n\n```\n$ jsonrepair [filename] {OPTIONS}\n```\n\nOptions:\n\n```\n--version, -v       Show application version\n--help,    -h       Show help\n```\n\nExample usage:\n\n```\n$ jsonrepair broken.json                         # Repair a file, output to console\n$ jsonrepair broken.json > repaired.json         # Repair a file, output to file\n$ jsonrepair broken.json --overwrite             # Repair a file, replace the file itself\n$ cat broken.json | jsonrepair                   # Repair data from an input stream\n$ cat broken.json | jsonrepair > repaired.json   # Repair data from an input stream, output to file\n```\n\n### Alternatives:\n\nSimilar libraries:\n\n- https://github.com/RyanMarcus/dirty-json\n\n### Develop\n\nTo build the library (ESM, CommonJs, and UMD output in the folder `lib`):\n\n```\n$ npm install\n$ npm run build\n```\n\nTo run the unit tests:\n\n```\n$ npm test\n```\n\nTo run the linter (eslint):\n\n```\n$ npm run lint\n```\n\nTo automatically fix linter issues:\n\n```\n$ npm run format\n```\n\nTo run the linter, build all, and run unit tests and integration tests:\n\n```\n$ npm run build-and-test\n```\n\n### Publish\n\nTo publish:\n\n```\n$ npm publish\n```\n\nThis will:\n\n- lint\n- test\n- build\n- increment the version number\n- push the changes to git, add a git version tag\n- publish the npm package\n\nTo try the build and see the change list without actually publishing:\n\n```\n$ npm publish-dry-run\n```\n\n\n## License\n\nReleased under the [ISC license](LICENSE.md).\n"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/josdejong/jsonrepair.git"
+  },
+  "schema": "jsii/0.10.0",
+  "targets": {
+    "js": {
+      "npm": "jsonrepair"
+    },
+    "python": {
+      "distName": "jsonrepair",
+      "module": "jsonrepair"
+    }
+  },
+  "types": {
+    "jsonrepair.JSONRepairError": {
+      "assembly": "jsonrepair",
+      "fqn": "jsonrepair.JSONRepairError",
+      "initializer": {
+        "locationInModule": {
+          "filename": "src/JSONRepairError.ts",
+          "line": 9
+        },
+        "parameters": [
+          {
+            "name": "message",
+            "type": {
+              "primitive": "string"
+            }
+          },
+          {
+            "name": "position",
+            "type": {
+              "primitive": "number"
+            }
+          }
+        ]
+      },
+      "kind": "class",
+      "locationInModule": {
+        "filename": "src/JSONRepairError.ts",
+        "line": 3
+      },
+      "name": "JSONRepairError",
+      "properties": [
+        {
+          "locationInModule": {
+            "filename": "src/JSONRepairError.ts",
+            "line": 5
+          },
+          "name": "message",
+          "type": {
+            "primitive": "string"
+          }
+        },
+        {
+          "locationInModule": {
+            "filename": "src/JSONRepairError.ts",
+            "line": 4
+          },
+          "name": "name",
+          "type": {
+            "primitive": "string"
+          }
+        },
+        {
+          "locationInModule": {
+            "filename": "src/JSONRepairError.ts",
+            "line": 7
+          },
+          "name": "position",
+          "type": {
+            "primitive": "number"
+          }
+        },
+        {
+          "locationInModule": {
+            "filename": "src/JSONRepairError.ts",
+            "line": 6
+          },
+          "name": "stack",
+          "optional": true,
+          "type": {
+            "primitive": "string"
+          }
+        }
+      ],
+      "symbolId": "src/JSONRepairError:JSONRepairError"
+    }
+  },
+  "version": "3.0.1",
+  "fingerprint": "cjo9Mt7ie8N4cJ0H8I75uo3Uo1XY+w/ahY65tDhwEQw="
+}

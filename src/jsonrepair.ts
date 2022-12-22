@@ -106,9 +106,10 @@ export function jsonrepair(text: string): string {
   if (i >= text.length) {
     // reached the end of the document properly
     return output
+  } else {
+    throwUnexpectedCharacter()
+    return "" // TS2366: Function lacks ending return statement and return type does not include 'undefined'.
   }
-
-  throwUnexpectedCharacter()
 
   function parseValue(): boolean {
     parseWhitespaceAndSkipComments()
@@ -121,7 +122,7 @@ export function jsonrepair(text: string): string {
       parseUnquotedString()
     parseWhitespaceAndSkipComments()
 
-    return processed
+    return Boolean(processed).valueOf()
   }
 
   function parseWhitespaceAndSkipComments(): boolean {
@@ -592,6 +593,7 @@ export function jsonrepair(text: string): string {
         return true
       }
     }
+    return false
   }
 
   function expectDigit(start: number) {
